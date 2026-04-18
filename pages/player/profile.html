@@ -226,6 +226,15 @@
 
 <script>
     function loadPlayerData() {
+        // 添加07档案访问线索（确保不重复）
+        if (typeof ClueCollector !== 'undefined') {
+            let existing = ClueCollector.getCollected();
+            if (!existing.includes('访问了07号档案')) {
+                ClueCollector.add('访问了07号档案');
+                console.log('[07档案] 已添加线索：访问了07号档案');
+            }
+        }
+        
         let firstVisit = localStorage.getItem('arg_first_visit');
         if (firstVisit) {
             document.getElementById('firstVisit').innerText = new Date(firstVisit).toLocaleString();
@@ -277,13 +286,7 @@
     document.getElementById('autoBtn').addEventListener('click', triggerAutoEnding);
     document.getElementById('deleteBtn').addEventListener('click', triggerDeleteEnding);
     
-    if (typeof ClueCollector !== 'undefined') {
-        ClueCollector.add('访问了07号档案');
-    }
-    
     loadPlayerData();
-    
-
 </script>
 
 <script src="../../js/common.js"></script>
