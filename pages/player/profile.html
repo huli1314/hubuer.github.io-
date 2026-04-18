@@ -228,12 +228,17 @@
     function loadPlayerData() {
         // 添加07档案访问线索（确保不重复）
         if (typeof ClueCollector !== 'undefined') {
-            let existing = ClueCollector.getCollected();
-            if (!existing.includes('访问了07号档案')) {
-                ClueCollector.add('访问了07号档案');
-                console.log('[07档案] 已添加线索：访问了07号档案');
-            }
-        }
+    let existing = ClueCollector.getCollected();
+    if (!existing.includes('访问了07号档案')) {
+        ClueCollector.add('访问了07号档案');
+        // 添加弹窗提示
+        let toast = document.createElement('div');
+        toast.innerText = '🔍 发现线索: 访问了07号档案';
+        toast.style.cssText = 'position:fixed; bottom:80px; right:20px; background:#ff8200; color:#fff; padding:8px 16px; border-radius:8px; font-size:13px; z-index:10000; font-family:monospace;';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    }
+}
         
         let firstVisit = localStorage.getItem('arg_first_visit');
         if (firstVisit) {
