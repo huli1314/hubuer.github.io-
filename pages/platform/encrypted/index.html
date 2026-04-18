@@ -189,13 +189,13 @@
         document.getElementById('visitedPlatforms').innerText = visited.map(v => platformNames[v] || v).join(', ') || '暂无';
         
         let clues = ClueCollector ? ClueCollector.getCollected() : [];
-        document.getElementById('clueCount').innerHTML = `<span style="color:#0f0">${clues.length}</span> / 36`;
+        document.getElementById('clueCount').innerHTML = `<span style="color:#0f0">${clues.length}</span> / 35`;
     }
 
-    // 真结局触发函数
+    // 真结局触发函数（总线索数要求改为35）
     function checkTrueEnding() {
         let clues = ClueCollector ? ClueCollector.getCollected() : [];
-        let totalNeeded = 36;
+        let totalNeeded = 35;
         
         if (clues.length < totalNeeded) {
             alert(`⚠️ 线索不足！\n\n当前收集：${clues.length} / ${totalNeeded}\n\n请继续探索各平台，收集更多线索。`);
@@ -217,8 +217,6 @@
             localStorage.setItem('arg_start_time', Date.now().toString());
         }
     });
-
-
 </script>
 
 <script src="../../../js/common.js"></script>
