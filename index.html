@@ -122,7 +122,9 @@
         <a href="javascript:void(0)" data-platform="profile" class="disabled" id="profileLink">🆔 07 号 档 案 <span class="locked-badge">[锁定]</span></a>
         
         <div class="separator"></div>
-        <a href="pages/tools/timeline.html">⏱️ 时 间 线 工 具</a>
+        
+        <!-- 时间线工具 - 初始禁用，07档案解锁后开启 -->
+        <a href="javascript:void(0)" class="disabled" id="timelineLink">⏱️ 时 间 线 工 具 <span class="locked-badge">[锁定]</span></a>
     </div>
 
     <div class="footer">
@@ -133,8 +135,9 @@
 <script>
     // 检查解锁状态
     function checkUnlocks() {
-        // 微信业主群：浏览过任意3个不同平台后解锁
         let visitedPlatforms = JSON.parse(localStorage.getItem('arg_visited_platforms') || '[]');
+        
+        // 微信业主群：浏览过任意3个不同平台后解锁
         if (visitedPlatforms.length >= 3) {
             let wechatLink = document.getElementById('wechatLink');
             if (wechatLink && wechatLink.classList.contains('disabled')) {
@@ -166,6 +169,15 @@
                 profileLink.classList.remove('disabled');
                 profileLink.setAttribute('href', 'pages/player/profile.html');
                 let badge = profileLink.querySelector('.locked-badge');
+                if (badge) badge.remove();
+            }
+            
+            // 07档案解锁后，时间线工具也解锁
+            let timelineLink = document.getElementById('timelineLink');
+            if (timelineLink && timelineLink.classList.contains('disabled')) {
+                timelineLink.classList.remove('disabled');
+                timelineLink.setAttribute('href', 'pages/tools/timeline.html');
+                let badge = timelineLink.querySelector('.locked-badge');
                 if (badge) badge.remove();
             }
         }
